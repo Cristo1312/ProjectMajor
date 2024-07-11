@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendario Partite</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"> <!-- Aggiungi Bootstrap 5 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"> <!-- Aggiungi Font Awesome per icone -->
+    <style>
+      body {
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif; /* Aggiunto per uniformare il font */
+}
+
+.container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Allinea il contenuto al centro della pagina */
+}
+
+.match-item {
+    background: #007bff;
+    color: #fff;
+    padding: 20px; /* Aumenta il padding per rendere il box più grande */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px; /* Aumenta la distanza tra gli elementi */
+    display: flex;
+    justify-content: center; /* Centra il testo orizzontalmente */
+    align-items: center;
+    font-size: 1.5em; /* Aumenta la dimensione del testo */
+    text-align: center; /* Centra il testo all'interno del box */
+    width: 100%; /* Occupa tutta la larghezza disponibile */
+    max-width: 600px; /* Limita la larghezza massima del box */
+}
+
+.back-button {
+    text-decoration: none;
+    background-color: #28a745;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.back-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Calendario Partite</h1>
+        <div class="card p-4">
+            {% if matches %}
+                <div class="list-group">
+                    {% for round_num, round_matches in matches %}
+                        <h2 class="my-3">Turno {{ round_num }}</h2>
+                        {% for match in round_matches %}
+                            <li class="list-group-item match-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-futbol me-2"></i>
+                                    {{ match[0] }} vs {{ match[1] }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-center">Nessuna partita programmata. Per favore, inserisci prima i nomi delle squadre.</p>
+            {% endif %}
+        </div>
+        <a href="{{ url_for('home') }}" class="btn btn-success back-button">Torna alla Home</a>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> <!-- Aggiungi Bootstrap 5 JS -->
+</body>
+</html>
